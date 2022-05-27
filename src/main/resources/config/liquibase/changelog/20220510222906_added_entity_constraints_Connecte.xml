@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Connecte.
+    -->
+    <changeSet id="20220510222906-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="capteur_id"
+                                 baseTableName="connecte"
+                                 constraintName="fk_connecte__capteur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="capteur"/>
+
+        <addForeignKeyConstraint baseColumnNames="boitier_id"
+                                 baseTableName="connecte"
+                                 constraintName="fk_connecte__boitier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="boitier"/>
+    </changeSet>
+</databaseChangeLog>

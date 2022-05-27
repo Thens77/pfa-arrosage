@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="boitier">
+      <h2 data-cy="boitierDetailsHeading"><span>Boitier</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ boitier.id }}</span>
+        </dd>
+        <dt><span>Refrence</span></dt>
+        <dd>
+          <span>{{ boitier.refrence }}</span>
+        </dd>
+        <dt><span>Nbr Branche</span></dt>
+        <dd>
+          <span>{{ boitier.nbrBranche }}</span>
+        </dd>
+        <dt><span>Installation</span></dt>
+        <dd>
+          <div *ngIf="boitier.installation">
+            <a [routerLink]="['/installation', boitier.installation?.id, 'view']">{{ boitier.installation?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+      <jhi-capteur [idb]="boitier.id"></jhi-capteur>
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/boitier', boitier.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

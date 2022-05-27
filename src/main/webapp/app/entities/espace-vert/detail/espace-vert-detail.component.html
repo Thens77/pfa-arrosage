@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="espaceVert">
+      <h2 data-cy="espaceVertDetailsHeading"><span>Espace Vert</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ espaceVert.id }}</span>
+        </dd>
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ espaceVert.libelle }}</span>
+        </dd>
+        <dt><span>Photo</span></dt>
+        <dd>
+          <div *ngIf="espaceVert.photo">
+            <a (click)="openFile(espaceVert.photo, espaceVert.photoContentType)">
+              <img
+                [src]="'data:' + espaceVert.photoContentType + ';base64,' + espaceVert.photo"
+                style="max-width: 100%"
+                alt="espaceVert image"
+              />
+            </a>
+            {{ espaceVert.photoContentType }}, {{ byteSize(espaceVert.photo) }}
+          </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <span>{{ espaceVert.user?.id }}</span>
+        </dd>
+      </dl>
+      <div class="d-flex justify-content-end">
+        <h4>Creer une zone a linterieur de cet espace</h4>
+        <button class="btn btn-primary" mat-raised-button  (click)="openDialog()">
+          <fa-icon icon="plus"></fa-icon>
+          Ajouter
+        </button>
+      </div>
+     
+      <jhi-zone [ide]="espaceVert.id"></jhi-zone>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/espace-vert', espaceVert.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510222857",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "zone",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "superficie",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "nbrMaxPlante",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "photo",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Zone",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "arrosage",
+      "otherEntityRelationshipName": "zone",
+      "relationshipName": "arrosage",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "plantation",
+      "otherEntityRelationshipName": "zone",
+      "relationshipName": "plantation",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "grandeur",
+      "otherEntityRelationshipName": "zone",
+      "relationshipName": "grandeur",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "typeSol",
+      "otherEntityRelationshipName": "zone",
+      "relationshipName": "typesol",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "espaceVert",
+      "otherEntityRelationshipName": "zone",
+      "relationshipName": "espaceVert",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "boitier",
+      "otherEntityRelationshipName": "zone",
+      "relationshipName": "boitier",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

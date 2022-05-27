@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="ConnecteHeading">
+    <span>Connectes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-connecte"
+        [routerLink]="['/connecte/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Connecte </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="connectes?.length === 0">
+    <span>No connectes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="connectes && connectes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Fonctionnel</span></th>
+          <th scope="col"><span>Branche</span></th>
+          <th scope="col"><span>Capteur</span></th>
+          <th scope="col"><span>Boitier</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let connecte of connectes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/connecte', connecte.id, 'view']">{{ connecte.id }}</a>
+          </td>
+          <td>{{ connecte.fonctionnel }}</td>
+          <td>{{ connecte.branche }}</td>
+          <td>
+            <div *ngIf="connecte.capteur">
+              <a [routerLink]="['/capteur', connecte.capteur?.id, 'view']">{{ connecte.capteur?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="connecte.boitier">
+              <a [routerLink]="['/boitier', connecte.boitier?.id, 'view']">{{ connecte.boitier?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/connecte', connecte.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/connecte', connecte.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(connecte)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

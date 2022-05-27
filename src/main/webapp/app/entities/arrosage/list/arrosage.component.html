@@ -1,0 +1,88 @@
+<div>
+  <h2 id="page-heading" data-cy="ArrosageHeading">
+    <span>Arrosages</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-arrosage"
+        [routerLink]="['/arrosage/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Arrosage </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="arrosages?.length === 0">
+    <span>No arrosages found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="arrosages && arrosages.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Date</span></th>
+          <th scope="col"><span>Duree</span></th>
+          <th scope="col"><span>Quantite Eau</span></th>
+          <th scope="col"><span>Zone</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let arrosage of arrosages; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/arrosage', arrosage.id, 'view']">{{ arrosage.id }}</a>
+          </td>
+          <td>{{ arrosage.date | formatMediumDate }}</td>
+          <td>{{ arrosage.duree }}</td>
+          <td>{{ arrosage.quantiteEau }}</td>
+          <td>
+            <div *ngIf="arrosage.zone">
+              <a [routerLink]="['/zone', arrosage.zone?.id, 'view']">{{ arrosage.zone?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/arrosage', arrosage.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/arrosage', arrosage.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(arrosage)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

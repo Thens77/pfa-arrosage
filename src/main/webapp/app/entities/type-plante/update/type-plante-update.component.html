@@ -1,0 +1,97 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-type-plante-heading" data-cy="TypePlanteCreateUpdateHeading">Create or edit a Type Plante</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_humiditeMin">Humidite Min</label>
+          <input
+            type="number"
+            class="form-control"
+            name="humiditeMin"
+            id="field_humiditeMin"
+            data-cy="humiditeMin"
+            formControlName="humiditeMin"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_humiditeMax">Humidite Max</label>
+          <input
+            type="number"
+            class="form-control"
+            name="humiditeMax"
+            id="field_humiditeMax"
+            data-cy="humiditeMax"
+            formControlName="humiditeMax"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_temperatureMin">Temperature Min</label>
+          <input
+            type="number"
+            class="form-control"
+            name="temperatureMin"
+            id="field_temperatureMin"
+            data-cy="temperatureMin"
+            formControlName="temperatureMin"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_temperatureMax">Temperature Max</label>
+          <input
+            type="number"
+            class="form-control"
+            name="temperatureMax"
+            id="field_temperatureMax"
+            data-cy="temperatureMax"
+            formControlName="temperatureMax"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_limunosite">Limunosite</label>
+          <input
+            type="number"
+            class="form-control"
+            name="limunosite"
+            id="field_limunosite"
+            data-cy="limunosite"
+            formControlName="limunosite"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

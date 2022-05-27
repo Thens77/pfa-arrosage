@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="plantation">
+      <h2 data-cy="plantationDetailsHeading"><span>Plantation</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ plantation.id }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ plantation.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Nbr Plante</span></dt>
+        <dd>
+          <span>{{ plantation.nbrPlante }}</span>
+        </dd>
+        <dt><span>Plante</span></dt>
+        <dd>
+          <div *ngIf="plantation.plante">
+            <a [routerLink]="['/plante', plantation.plante?.id, 'view']">{{ plantation.plante?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Zone</span></dt>
+        <dd>
+          <div *ngIf="plantation.zone">
+            <a [routerLink]="['/zone', plantation.zone?.id, 'view']">{{ plantation.zone?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plantation', plantation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

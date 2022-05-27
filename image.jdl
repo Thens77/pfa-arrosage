@@ -1,0 +1,132 @@
+
+
+entity EspaceVert {
+libelle String
+
+photo ImageBlob
+}
+
+
+entity Zone  {
+	libelle String
+    superficie Double
+    nbrMaxPlante Integer 
+    photo ImageBlob
+    
+}
+entity TypeSol {
+	libelle String
+}
+// an ignored comment
+/** not an ignored comment */
+entity Plante {
+libelle String
+photo ImageBlob
+	
+}
+
+ 
+
+
+entity Capteur {
+	type String
+    reference String 
+     photo ImageBlob
+     frequence Double
+
+}
+
+
+entity Boitier {
+refrence String
+nbrBranche Integer 
+	
+}
+entity Grandeur { 
+	type String
+	valeur String
+	date LocalDate
+	
+}
+
+
+entity TypePlante {
+	humiditeMin Float
+	humiditeMax Float
+    temperatureMin Float
+	temperatureMax Float
+    limunosite Float
+	libelle String
+}
+entity Plantation {
+	date LocalDate 
+    nbrPlante Integer
+}
+
+entity  Arrosage {
+	date LocalDate
+    duree Double
+    quantiteEau  Double
+}
+entity  Connecte {	
+fonctionnel Boolean
+branche String
+}
+entity Installation {
+	dateDebut LocalDate 
+    dateFin LocalDate 
+}
+
+
+
+
+relationship  ManyToOne {
+	Zone{typesol} to TypeSol
+}
+
+relationship ManyToOne {
+	EspaceVert {User} to User
+}
+
+relationship  OneToMany {
+	EspaceVert{zone} to Zone
+}
+relationship  OneToMany {
+	Zone{arrosage} to Arrosage
+}
+
+
+
+relationship  OneToMany {
+	Boitier{zone} to Zone
+    }
+
+relationship  ManyToOne {
+	Plantation{plante} to Plante
+}
+relationship  OneToMany {
+	Zone{plantation} to Plantation
+}
+
+relationship ManyToOne{
+	Plante{Typeplante} to TypePlante
+}
+
+
+relationship  OneToMany {
+	Boitier{connecte} to Connecte
+}
+relationship  ManyToOne {
+	Connecte{capteur} to Capteur
+}
+relationship  OneToMany {
+	Zone{grandeur} to Grandeur
+}
+relationship  ManyToOne {
+	Boitier{installation} to Installation
+   
+}
+
+
+
+

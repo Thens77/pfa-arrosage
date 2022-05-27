@@ -1,0 +1,89 @@
+<div>
+  <h2 id="page-heading" data-cy="CapteurHeading">
+    <span>Capteurs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-capteur"
+        [routerLink]="['/capteur/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Capteur </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="capteurs?.length === 0">
+    <span>No capteurs found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="capteurs && capteurs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Type</span></th>
+          <th scope="col"><span>Reference</span></th>
+          <th scope="col"><span>Photo</span></th>
+          <th scope="col"><span>Frequence</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let capteur of capteurs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/capteur', capteur.id, 'view']">{{ capteur.id }}</a>
+          </td>
+          <td>{{ capteur.type }}</td>
+          <td>{{ capteur.reference }}</td>
+          <td>
+            <a *ngIf="capteur.photo" (click)="openFile(capteur.photo, capteur.photoContentType)">
+              <img [src]="'data:' + capteur.photoContentType + ';base64,' + capteur.photo" style="max-height: 30px" alt="capteur image" />
+            </a>
+            <span *ngIf="capteur.photo">{{ capteur.photoContentType }}, {{ byteSize(capteur.photo) }}</span>
+          </td>
+          <td>{{ capteur.frequence }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/capteur', capteur.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/capteur', capteur.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(capteur)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div>
+  <h2 id="page-heading" data-cy="EspaceVertHeading">
+    <span>Espace Verts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-espace-vert"
+        [routerLink]="['/espace-vert/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Espace Vert </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="espaceVerts?.length === 0">
+    <span>No espaceVerts found</span>
+  </div>
+  
+  <div class="table-responsive" id="entities" *ngIf="espaceVerts && espaceVerts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Libelle</span></th>
+          <th scope="col"><span>Photo</span></th>
+          <th scope="col"><span>Utilisateur</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let espaceVert of espaceVerts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/espace-vert', espaceVert.id, 'view']">{{ espaceVert.id }}</a>
+          </td>
+          <td>{{ espaceVert.libelle }}</td>
+          <td>
+            <a *ngIf="espaceVert.photo" (click)="openFile(espaceVert.photo, espaceVert.photoContentType)">
+              <img
+                [src]="'data:' + espaceVert.photoContentType + ';base64,' + espaceVert.photo"
+                style="max-height: 30px"
+                alt="espaceVert image"
+              />
+            </a>
+            <span *ngIf="espaceVert.photo">{{ espaceVert.photoContentType }}, {{ byteSize(espaceVert.photo) }}</span>
+          </td>
+          <td>
+            {{ espaceVert.user?.first }}  {{ espaceVert.user?.last }}
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/espace-vert', espaceVert.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/espace-vert', espaceVert.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(espaceVert)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<style>
+   @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+</style>

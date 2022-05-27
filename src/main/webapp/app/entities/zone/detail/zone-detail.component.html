@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="zone">
+      <h2 data-cy="zoneDetailsHeading"><span>Zone</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ zone.id }}</span>
+        </dd>
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ zone.libelle }}</span>
+        </dd>
+        <dt><span>Superficie</span></dt>
+        <dd>
+          <span>{{ zone.superficie }}</span>
+        </dd>
+        <dt><span>Nbr Max Plante</span></dt>
+        <dd>
+          <span>{{ zone.nbrMaxPlante }}</span>
+        </dd>
+        <dt><span>Photo</span></dt>
+        <dd>
+          <div *ngIf="zone.photo">
+            <a (click)="openFile(zone.photo, zone.photoContentType)">
+              <img [src]="'data:' + zone.photoContentType + ';base64,' + zone.photo" style="max-width: 100%" alt="zone image" />
+            </a>
+            {{ zone.photoContentType }}, {{ byteSize(zone.photo) }}
+          </div>
+        </dd>
+        <dt><span>Typesol</span></dt>
+        <dd>
+          <div *ngIf="zone.typesol">
+            <a [routerLink]="['/type-sol', zone.typesol?.id, 'view']">{{ zone.typesol?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Espace Vert</span></dt>
+        <dd>
+          <div *ngIf="zone.espaceVert">
+            <a [routerLink]="['/espace-vert', zone.espaceVert?.id, 'view']">{{ zone.espaceVert?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Boitier</span></dt>
+        <dd>
+          <div *ngIf="zone.boitier">
+            <a [routerLink]="['/boitier', zone.boitier?.id, 'view']">{{ zone.boitier?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+      <div class="d-flex justify-content-end">
+        <h4>Ajouter une plantation dans cette zone  </h4>
+        <button class="btn btn-primary" mat-raised-button  (click)="openDialog()">
+          <fa-icon icon="plus"></fa-icon>
+          Ajouter
+        </button>
+      </div>
+      <jhi-plante [idz]="zone.id"></jhi-plante>
+      <jhi-grandeur [idz]="zone.id" ></jhi-grandeur>
+      <jhi-boitier [idz]="zone.id"></jhi-boitier>
+      <jhi-type-sol [idz]="zone.id"></jhi-type-sol>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/zone', zone.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

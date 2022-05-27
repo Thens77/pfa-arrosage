@@ -1,0 +1,20 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510222858",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "type_sol",
+  "fields": [
+    {
+      "fieldName": "libelle",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "TypeSol",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

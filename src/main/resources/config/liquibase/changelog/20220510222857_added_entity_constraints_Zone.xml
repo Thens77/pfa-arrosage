@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Zone.
+    -->
+    <changeSet id="20220510222857-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="typesol_id"
+                                 baseTableName="zone"
+                                 constraintName="fk_zone__typesol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_sol"/>
+
+        <addForeignKeyConstraint baseColumnNames="espace_vert_id"
+                                 baseTableName="zone"
+                                 constraintName="fk_zone__espace_vert_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="espace_vert"/>
+
+        <addForeignKeyConstraint baseColumnNames="boitier_id"
+                                 baseTableName="zone"
+                                 constraintName="fk_zone__boitier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="boitier"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510222907",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "installation",
+  "fields": [
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Installation",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

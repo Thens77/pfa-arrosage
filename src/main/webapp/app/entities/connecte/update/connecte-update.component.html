@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-connecte-heading" data-cy="ConnecteCreateUpdateHeading">Create or edit a Connecte</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fonctionnel">Fonctionnel</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="fonctionnel"
+            id="field_fonctionnel"
+            data-cy="fonctionnel"
+            formControlName="fonctionnel"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_branche">Branche</label>
+          <input type="text" class="form-control" name="branche" id="field_branche" data-cy="branche" formControlName="branche" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_capteur">Capteur</label>
+          <ng-multiselect-dropdown
+                [placeholder]="'custom placeholder'"
+                [data]='dropdownList'
+                [settings]="dropdownSettings"
+                class="form-control" id="field_capteur" data-cy="capteur" name="capteur" formControlName="capteur"
+              >
+              </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_boitier">Boitier</label>
+          <select class="form-control" id="field_boitier" data-cy="boitier" name="boitier" formControlName="boitier">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="boitierOption.id === editForm.get('boitier')!.value?.id ? editForm.get('boitier')!.value : boitierOption"
+              *ngFor="let boitierOption of boitiersSharedCollection; trackBy: trackBoitierById"
+            >
+              {{ boitierOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

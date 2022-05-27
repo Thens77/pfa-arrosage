@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="plante">
+      <h2 data-cy="planteDetailsHeading"><span>Plante</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ plante.id }}</span>
+        </dd>
+        <dt><span>Libelle</span></dt>
+        <dd>
+          <span>{{ plante.libelle }}</span>
+        </dd>
+        <dt><span>Photo</span></dt>
+        <dd>
+          <div *ngIf="plante.photo">
+            <a (click)="openFile(plante.photo, plante.photoContentType)">
+              <img [src]="'data:' + plante.photoContentType + ';base64,' + plante.photo" style="max-width: 100%" alt="plante image" />
+            </a>
+            {{ plante.photoContentType }}, {{ byteSize(plante.photo) }}
+          </div>
+        </dd>
+        <dt><span>Typeplante</span></dt>
+        <dd>
+          <div *ngIf="plante.typeplante">
+            <a [routerLink]="['/type-plante', plante.typeplante?.id, 'view']">{{ plante.typeplante?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plante', plante.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

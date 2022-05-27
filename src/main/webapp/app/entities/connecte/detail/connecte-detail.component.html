@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="connecte">
+      <h2 data-cy="connecteDetailsHeading"><span>Connecte</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ connecte.id }}</span>
+        </dd>
+        <dt><span>Fonctionnel</span></dt>
+        <dd>
+          <span>{{ connecte.fonctionnel }}</span>
+        </dd>
+        <dt><span>Branche</span></dt>
+        <dd>
+          <span>{{ connecte.branche }}</span>
+        </dd>
+        <dt><span>Capteur</span></dt>
+        <dd>
+          <div *ngIf="connecte.capteur">
+            <a [routerLink]="['/capteur', connecte.capteur?.id, 'view']">{{ connecte.capteur?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Boitier</span></dt>
+        <dd>
+          <div *ngIf="connecte.boitier">
+            <a [routerLink]="['/boitier', connecte.boitier?.id, 'view']">{{ connecte.boitier?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/connecte', connecte.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

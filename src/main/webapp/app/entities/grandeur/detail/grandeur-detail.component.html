@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="grandeur">
+      <h2 data-cy="grandeurDetailsHeading"><span>Grandeur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ grandeur.id }}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+          <span>{{ grandeur.type }}</span>
+        </dd>
+        <dt><span>Valeur</span></dt>
+        <dd>
+          <span>{{ grandeur.valeur }}</span>
+        </dd>
+        <dt><span>Date</span></dt>
+        <dd>
+          <span>{{ grandeur.date | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Zone</span></dt>
+        <dd>
+          <div *ngIf="grandeur.zone">
+            <a [routerLink]="['/zone', grandeur.zone?.id, 'view']">{{ grandeur.zone?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/grandeur', grandeur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

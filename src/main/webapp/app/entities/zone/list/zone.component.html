@@ -1,0 +1,98 @@
+<div>
+  <h2 id="page-heading" data-cy="ZoneHeading">
+    <span>Zones</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+       [disabled]="ide !== undefined"
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-zone"
+        [routerLink]="['/zone/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Zone </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="zones?.length === 0">
+    <span>No zones found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="zones && zones.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Libelle</span></th>
+          <th scope="col"><span>Superficie</span></th>
+          <th scope="col"><span>Nbr Max Plante</span></th>
+          <th scope="col"><span>Photo</span></th>
+          <th scope="col"><span>Typesol</span></th>
+          <th scope="col"><span>Espace Vert</span></th>
+          <th scope="col"><span>Boitier</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let zone of zones; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/zone', zone.id, 'view']">{{ zone.id }}</a>
+          </td>
+          <td>{{ zone.libelle }}</td>
+          <td>{{ zone.superficie }}</td>
+          <td>{{ zone.nbrMaxPlante }}</td>
+          <td>
+            <a *ngIf="zone.photo" (click)="openFile(zone.photo, zone.photoContentType)">
+              <img [src]="'data:' + zone.photoContentType + ';base64,' + zone.photo" style="max-height: 30px" alt="zone image" />
+            </a>
+            <span *ngIf="zone.photo">{{ zone.photoContentType }}, {{ byteSize(zone.photo) }}</span>
+          </td>
+          <td>
+            <div *ngIf="zone.typesol">
+              <a [routerLink]="['/type-sol', zone.typesol?.id, 'view']">{{ zone.typesol?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="zone.espaceVert">
+              <a [routerLink]="['/espace-vert', zone.espaceVert?.id, 'view']">{{ zone.espaceVert?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="zone.boitier">
+              <a [routerLink]="['/boitier', zone.boitier?.id, 'view']">{{ zone.boitier?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/zone', zone.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/zone', zone.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(zone)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

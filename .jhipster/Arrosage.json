@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20220510222905",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "arrosage",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "duree",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "quantiteEau",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Arrosage",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "zone",
+      "otherEntityRelationshipName": "arrosage",
+      "relationshipName": "zone",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
